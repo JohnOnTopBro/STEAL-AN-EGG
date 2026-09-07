@@ -20,6 +20,10 @@ else
     ScreenGui.Parent = game:GetService("CoreGui")
 end
 
+--==================================================
+-- CIRCLE BUTTON
+--==================================================
+
 local CircleBtn = Instance.new("ImageButton")
 CircleBtn.Name = "CircleToggle"
 CircleBtn.Parent = ScreenGui
@@ -38,6 +42,10 @@ CircleBtn.ZIndex = 50
 local CircleCorner = Instance.new("UICorner")
 CircleCorner.CornerRadius = UDim.new(1,0)
 CircleCorner.Parent = CircleBtn
+
+--==================================================
+-- LOADING
+--==================================================
 
 local LoadingFrame = Instance.new("Frame")
 LoadingFrame.Parent = ScreenGui
@@ -106,6 +114,120 @@ LoadingBar.BorderSizePixel = 0
 local BarCorner = Instance.new("UICorner")
 BarCorner.CornerRadius = UDim.new(1,0)
 BarCorner.Parent = LoadingBar
+
+--==================================================
+-- CREDITS POPUP
+--==================================================
+
+local CreditsFrame = Instance.new("Frame")
+CreditsFrame.Name = "CreditsPopup"
+CreditsFrame.Parent = ScreenGui
+CreditsFrame.BackgroundColor3 = Color3.fromRGB(8,18,35)
+CreditsFrame.Position = UDim2.new(0.5,-160,0,25)
+CreditsFrame.Size = UDim2.new(0,320,0,60)
+CreditsFrame.BorderSizePixel = 0
+CreditsFrame.Visible = false
+CreditsFrame.ZIndex = 100
+
+local CreditsCorner = Instance.new("UICorner")
+CreditsCorner.CornerRadius = UDim.new(0,12)
+CreditsCorner.Parent = CreditsFrame
+
+local CreditsStroke = Instance.new("UIStroke")
+CreditsStroke.Parent = CreditsFrame
+CreditsStroke.Color = Color3.fromRGB(0,170,255)
+CreditsStroke.Thickness = 1.5
+CreditsStroke.Transparency = 0.15
+
+local CreditsText = Instance.new("TextLabel")
+CreditsText.Parent = CreditsFrame
+CreditsText.BackgroundTransparency = 1
+CreditsText.Size = UDim2.new(1,-20,1,0)
+CreditsText.Position = UDim2.new(0,10,0,0)
+CreditsText.Font = Enum.Font.GothamBold
+CreditsText.Text = "Credits to JohnOnTop 👑"
+CreditsText.TextColor3 = Color3.fromRGB(70,200,255)
+CreditsText.TextSize = 16
+CreditsText.ZIndex = 101
+
+local function ShowCredits()
+
+    CreditsFrame.Visible = true
+    CreditsFrame.BackgroundTransparency = 1
+    CreditsText.TextTransparency = 1
+    CreditsStroke.Transparency = 1
+
+    CreditsFrame.Position = UDim2.new(0.5,-160,-0.05,0)
+
+    local SlideIn = TweenService:Create(
+        CreditsFrame,
+        TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+        {
+            Position = UDim2.new(0.5,-160,0,25),
+            BackgroundTransparency = 0
+        }
+    )
+
+    local TextIn = TweenService:Create(
+        CreditsText,
+        TweenInfo.new(0.4),
+        {
+            TextTransparency = 0
+        }
+    )
+
+    local StrokeIn = TweenService:Create(
+        CreditsStroke,
+        TweenInfo.new(0.4),
+        {
+            Transparency = 0.15
+        }
+    )
+
+    SlideIn:Play()
+    TextIn:Play()
+    StrokeIn:Play()
+
+    -- Stay visible for 20 seconds
+    task.wait(20)
+
+    local SlideOut = TweenService:Create(
+        CreditsFrame,
+        TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
+        {
+            Position = UDim2.new(0.5,-160,-0.05,0),
+            BackgroundTransparency = 1
+        }
+    )
+
+    local TextOut = TweenService:Create(
+        CreditsText,
+        TweenInfo.new(0.4),
+        {
+            TextTransparency = 1
+        }
+    )
+
+    local StrokeOut = TweenService:Create(
+        CreditsStroke,
+        TweenInfo.new(0.4),
+        {
+            Transparency = 1
+        }
+    )
+
+    SlideOut:Play()
+    TextOut:Play()
+    StrokeOut:Play()
+
+    task.wait(0.5)
+
+    CreditsFrame.Visible = false
+end
+
+--==================================================
+-- MAIN GUI
+--==================================================
 
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
@@ -214,6 +336,10 @@ RefreshStroke.Parent = RefreshBtn
 RefreshStroke.Color = Color3.fromRGB(70,200,255)
 RefreshStroke.Thickness = 1
 RefreshStroke.Transparency = 0.4
+
+--==================================================
+-- SERVER LOADER
+--==================================================
 
 local function LoadServers()
 
@@ -335,6 +461,10 @@ local function LoadServers()
     end
 end
 
+--==================================================
+-- REFRESH
+--==================================================
+
 RefreshBtn.MouseButton1Click:Connect(function()
 
     RefreshBtn.Text = "⟳  REFRESHING..."
@@ -349,11 +479,16 @@ RefreshBtn.MouseButton1Click:Connect(function()
 
 end)
 
+--==================================================
+-- LOADING ANIMATION
+--==================================================
+
 local function StartLoading()
 
     LoadingFrame.Visible = true
     MainFrame.Visible = false
     CircleBtn.Visible = false
+    CreditsFrame.Visible = false
 
     for i = 0,100 do
 
@@ -433,7 +568,14 @@ local function StartLoading()
     CircleBtn.Visible = true
 
     LoadServers()
+
+    -- Show credits after loading
+    task.spawn(ShowCredits)
 end
+
+--==================================================
+-- BUTTONS
+--==================================================
 
 CircleBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = not MainFrame.Visible
@@ -442,5 +584,9 @@ end)
 CloseBtn.MouseButton1Click:Connect(function()
     MainFrame.Visible = false
 end)
+
+--==================================================
+-- START
+--==================================================
 
 task.spawn(StartLoading)
