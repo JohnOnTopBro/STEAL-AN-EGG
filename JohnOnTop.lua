@@ -344,7 +344,7 @@ RefreshBtn.MouseButton1Click:Connect(function()
 
     task.wait(0.5)
 
-    RefreshBtn.Text = "⟳  REFRESH SERVERS"
+    RefreshBtn.Text = "REFRESH SERVERS"
     RefreshBtn.Active = true
 
 end)
@@ -367,7 +367,7 @@ local function StartLoading()
         elseif i < 60 then
             LoadingText.Text = "Connecting to Roblox..."
         elseif i < 80 then
-            LoadingText.Text = "Loading server browser..."
+            LoadingText.Text = "Loading server finder..."
         elseif i < 100 then
             LoadingText.Text = "Preparing JOHN ON TOP..."
         else
