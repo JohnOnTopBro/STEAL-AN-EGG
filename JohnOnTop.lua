@@ -188,8 +188,8 @@ local function ShowCredits()
     TextIn:Play()
     StrokeIn:Play()
 
-    -- Stay visible for 20 seconds
-    task.wait(20)
+    -- Stay visible for 5 seconds
+    task.wait(5)
 
     local SlideOut = TweenService:Create(
         CreditsFrame,
@@ -277,7 +277,7 @@ Subtitle.BackgroundTransparency = 1
 Subtitle.Position = UDim2.new(0.06,0,0.55,0)
 Subtitle.Size = UDim2.new(0,230,0,18)
 Subtitle.Font = Enum.Font.Gotham
-Subtitle.Text = "1-PLAYER SERVER BROWSER"
+Subtitle.Text = "LOW SERVER FINDER"
 Subtitle.TextColor3 = Color3.fromRGB(130,170,200)
 Subtitle.TextSize = 10
 Subtitle.TextXAlignment = Enum.TextXAlignment.Left
@@ -467,7 +467,7 @@ end
 
 RefreshBtn.MouseButton1Click:Connect(function()
 
-    RefreshBtn.Text = "⟳  REFRESHING..."
+    RefreshBtn.Text = "REFRESHING..."
     RefreshBtn.Active = false
 
     LoadServers()
@@ -569,7 +569,7 @@ local function StartLoading()
 
     LoadServers()
 
-    -- Show credits after loading
+    -- Credits popup
     task.spawn(ShowCredits)
 end
 
