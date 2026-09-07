@@ -12,6 +12,12 @@ local Player = Players.LocalPlayer
 local PlaceId = game.PlaceId
 
 --==================================================
+-- KEY TABLE
+--==================================================
+
+local VALID_KEYS
+
+--==================================================
 -- GUI
 --==================================================
 
@@ -35,8 +41,8 @@ end
 local CircleBtn = Instance.new("ImageButton")
 CircleBtn.Name = "CircleToggle"
 CircleBtn.Parent = ScreenGui
-CircleBtn.Position = UDim2.new(0.05,0,0.45,0)
-CircleBtn.Size = UDim2.new(0,55,0,55)
+CircleBtn.Position = UDim2.new(0.05, 0, 0.45, 0)
+CircleBtn.Size = UDim2.new(0, 55, 0, 55)
 CircleBtn.BackgroundTransparency = 1
 CircleBtn.BorderSizePixel = 0
 CircleBtn.Image = "rbxassetid://134112829099529"
@@ -48,7 +54,7 @@ CircleBtn.AutoButtonColor = false
 CircleBtn.ZIndex = 50
 
 local CircleCorner = Instance.new("UICorner")
-CircleCorner.CornerRadius = UDim.new(1,0)
+CircleCorner.CornerRadius = UDim.new(1, 0)
 CircleCorner.Parent = CircleBtn
 
 --==================================================
@@ -57,80 +63,90 @@ CircleCorner.Parent = CircleBtn
 
 local KeyFrame = Instance.new("Frame")
 KeyFrame.Parent = ScreenGui
-KeyFrame.AnchorPoint = Vector2.new(0.5,0.5)
-KeyFrame.Position = UDim2.new(0.5,0,0.5,0)
-KeyFrame.Size = UDim2.new(0,350,0,210)
-KeyFrame.BackgroundColor3 = Color3.fromRGB(8,18,35)
+KeyFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+KeyFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+KeyFrame.Size = UDim2.new(0, 350, 0, 210)
+KeyFrame.BackgroundColor3 = Color3.fromRGB(8, 18, 35)
 KeyFrame.Active = true
 KeyFrame.Draggable = true
 
 local KeyCorner = Instance.new("UICorner")
-KeyCorner.CornerRadius = UDim.new(0,14)
+KeyCorner.CornerRadius = UDim.new(0, 14)
 KeyCorner.Parent = KeyFrame
 
 local KeyStroke = Instance.new("UIStroke")
 KeyStroke.Parent = KeyFrame
-KeyStroke.Color = Color3.fromRGB(0,170,255)
+KeyStroke.Color = Color3.fromRGB(0, 170, 255)
 KeyStroke.Thickness = 1.5
 
 local KeyTitle = Instance.new("TextLabel")
 KeyTitle.Parent = KeyFrame
 KeyTitle.BackgroundTransparency = 1
-KeyTitle.Position = UDim2.new(0.06,0,0.08,0)
-KeyTitle.Size = UDim2.new(0.88,0,0,32)
+KeyTitle.Position = UDim2.new(0.06, 0, 0.08, 0)
+KeyTitle.Size = UDim2.new(0.88, 0, 0, 32)
 KeyTitle.Font = Enum.Font.GothamBold
 KeyTitle.Text = "JOHN ON TOP 👑"
-KeyTitle.TextColor3 = Color3.fromRGB(70,200,255)
+KeyTitle.TextColor3 = Color3.fromRGB(70, 200, 255)
 KeyTitle.TextSize = 20
 
 local KeySubtitle = Instance.new("TextLabel")
 KeySubtitle.Parent = KeyFrame
 KeySubtitle.BackgroundTransparency = 1
-KeySubtitle.Position = UDim2.new(0.06,0,0.27,0)
-KeySubtitle.Size = UDim2.new(0.88,0,0,20)
+KeySubtitle.Position = UDim2.new(0.06, 0, 0.27, 0)
+KeySubtitle.Size = UDim2.new(0.88, 0, 0, 20)
 KeySubtitle.Font = Enum.Font.Gotham
 KeySubtitle.Text = "Enter your key"
-KeySubtitle.TextColor3 = Color3.fromRGB(130,170,200)
+KeySubtitle.TextColor3 = Color3.fromRGB(130, 170, 200)
 KeySubtitle.TextSize = 12
 
 local KeyBox = Instance.new("TextBox")
 KeyBox.Parent = KeyFrame
-KeyBox.BackgroundColor3 = Color3.fromRGB(5,14,28)
-KeyBox.Position = UDim2.new(0.06,0,0.42,0)
-KeyBox.Size = UDim2.new(0.88,0,0,42)
+KeyBox.BackgroundColor3 = Color3.fromRGB(5, 14, 28)
+KeyBox.Position = UDim2.new(0.06, 0, 0.42, 0)
+KeyBox.Size = UDim2.new(0.88, 0, 0, 42)
 KeyBox.Font = Enum.Font.GothamMedium
 KeyBox.PlaceholderText = "Enter key..."
 KeyBox.Text = ""
-KeyBox.TextColor3 = Color3.fromRGB(220,245,255)
+KeyBox.TextColor3 = Color3.fromRGB(220, 245, 255)
 KeyBox.TextSize = 14
 KeyBox.ClearTextOnFocus = false
 
 local KeyBoxCorner = Instance.new("UICorner")
-KeyBoxCorner.CornerRadius = UDim.new(0,9)
+KeyBoxCorner.CornerRadius = UDim.new(0, 9)
 KeyBoxCorner.Parent = KeyBox
+
+local KeyBoxStroke = Instance.new("UIStroke")
+KeyBoxStroke.Parent = KeyBox
+KeyBoxStroke.Color = Color3.fromRGB(0, 100, 160)
+KeyBoxStroke.Thickness = 1
+
+--==================================================
+-- UNLOCK BUTTON
+--==================================================
 
 local SubmitBtn = Instance.new("TextButton")
 SubmitBtn.Parent = KeyFrame
-SubmitBtn.BackgroundColor3 = Color3.fromRGB(0,130,220)
-SubmitBtn.Position = UDim2.new(0.06,0,0.70,0)
-SubmitBtn.Size = UDim2.new(0.88,0,0,38)
+SubmitBtn.BackgroundColor3 = Color3.fromRGB(0, 130, 220)
+SubmitBtn.Position = UDim2.new(0.06, 0, 0.70, 0)
+SubmitBtn.Size = UDim2.new(0.88, 0, 0, 38)
 SubmitBtn.Font = Enum.Font.GothamBold
 SubmitBtn.Text = "UNLOCK"
-SubmitBtn.TextColor3 = Color3.fromRGB(255,255,255)
+SubmitBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 SubmitBtn.TextSize = 13
+SubmitBtn.AutoButtonColor = true
 
 local SubmitCorner = Instance.new("UICorner")
-SubmitCorner.CornerRadius = UDim.new(0,8)
+SubmitCorner.CornerRadius = UDim.new(0, 8)
 SubmitCorner.Parent = SubmitBtn
 
 local StatusLabel = Instance.new("TextLabel")
 StatusLabel.Parent = KeyFrame
 StatusLabel.BackgroundTransparency = 1
-StatusLabel.Position = UDim2.new(0.06,0,0.89,0)
-StatusLabel.Size = UDim2.new(0.88,0,0,18)
+StatusLabel.Position = UDim2.new(0.06, 0, 0.89, 0)
+StatusLabel.Size = UDim2.new(0.88, 0, 0, 18)
 StatusLabel.Font = Enum.Font.Gotham
 StatusLabel.Text = ""
-StatusLabel.TextColor3 = Color3.fromRGB(255,90,90)
+StatusLabel.TextColor3 = Color3.fromRGB(255, 90, 90)
 StatusLabel.TextSize = 11
 
 --==================================================
@@ -139,105 +155,115 @@ StatusLabel.TextSize = 11
 
 local LoadingFrame = Instance.new("Frame")
 LoadingFrame.Parent = ScreenGui
-LoadingFrame.AnchorPoint = Vector2.new(0.5,0.5)
-LoadingFrame.Position = UDim2.new(0.5,0,0.5,0)
-LoadingFrame.Size = UDim2.new(0,285,0,285)
-LoadingFrame.BackgroundColor3 = Color3.fromRGB(7,16,30)
+LoadingFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+LoadingFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+LoadingFrame.Size = UDim2.new(0, 285, 0, 285)
+LoadingFrame.BackgroundColor3 = Color3.fromRGB(7, 16, 30)
 LoadingFrame.BorderSizePixel = 0
 LoadingFrame.Visible = false
 LoadingFrame.ZIndex = 100
 
 local LoadingCorner = Instance.new("UICorner")
-LoadingCorner.CornerRadius = UDim.new(0,20)
+LoadingCorner.CornerRadius = UDim.new(0, 20)
 LoadingCorner.Parent = LoadingFrame
 
 local LoadingStroke = Instance.new("UIStroke")
 LoadingStroke.Parent = LoadingFrame
-LoadingStroke.Color = Color3.fromRGB(0,170,255)
+LoadingStroke.Color = Color3.fromRGB(0, 170, 255)
 LoadingStroke.Thickness = 1.5
 
--- Picture
+--==================================================
+-- LOADING PICTURE
+--==================================================
 
 local LoadingPicture = Instance.new("ImageLabel")
 LoadingPicture.Parent = LoadingFrame
-LoadingPicture.AnchorPoint = Vector2.new(0.5,0)
-LoadingPicture.Position = UDim2.new(0.5,0,0.10,0)
-LoadingPicture.Size = UDim2.new(0,110,0,110)
+LoadingPicture.AnchorPoint = Vector2.new(0.5, 0)
+LoadingPicture.Position = UDim2.new(0.5, 0, 0.10, 0)
+LoadingPicture.Size = UDim2.new(0, 110, 0, 110)
 LoadingPicture.BackgroundTransparency = 1
 LoadingPicture.Image = "rbxassetid://134112829099529"
 LoadingPicture.ScaleType = Enum.ScaleType.Crop
 LoadingPicture.ZIndex = 102
 
 local PictureCorner = Instance.new("UICorner")
-PictureCorner.CornerRadius = UDim.new(1,0)
+PictureCorner.CornerRadius = UDim.new(1, 0)
 PictureCorner.Parent = LoadingPicture
 
 local PictureStroke = Instance.new("UIStroke")
 PictureStroke.Parent = LoadingPicture
-PictureStroke.Color = Color3.fromRGB(0,190,255)
+PictureStroke.Color = Color3.fromRGB(0, 190, 255)
 PictureStroke.Thickness = 2
 
--- Title
+--==================================================
+-- LOADING TITLE
+--==================================================
 
 local LoadingTitle = Instance.new("TextLabel")
 LoadingTitle.Parent = LoadingFrame
 LoadingTitle.BackgroundTransparency = 1
-LoadingTitle.Position = UDim2.new(0.05,0,0.55,0)
-LoadingTitle.Size = UDim2.new(0.9,0,0,30)
+LoadingTitle.Position = UDim2.new(0.05, 0, 0.55, 0)
+LoadingTitle.Size = UDim2.new(0.9, 0, 0, 30)
 LoadingTitle.Font = Enum.Font.GothamBold
 LoadingTitle.Text = "JOHN ON TOP 👑"
-LoadingTitle.TextColor3 = Color3.fromRGB(70,200,255)
+LoadingTitle.TextColor3 = Color3.fromRGB(70, 200, 255)
 LoadingTitle.TextSize = 20
 LoadingTitle.ZIndex = 102
 
--- Status
+--==================================================
+-- LOADING TEXT
+--==================================================
 
 local LoadingText = Instance.new("TextLabel")
 LoadingText.Parent = LoadingFrame
 LoadingText.BackgroundTransparency = 1
-LoadingText.Position = UDim2.new(0.05,0,0.67,0)
-LoadingText.Size = UDim2.new(0.9,0,0,20)
+LoadingText.Position = UDim2.new(0.05, 0, 0.67, 0)
+LoadingText.Size = UDim2.new(0.9, 0, 0, 20)
 LoadingText.Font = Enum.Font.GothamMedium
 LoadingText.Text = "Loading..."
-LoadingText.TextColor3 = Color3.fromRGB(145,185,215)
+LoadingText.TextColor3 = Color3.fromRGB(145, 185, 215)
 LoadingText.TextSize = 12
 LoadingText.ZIndex = 102
 
--- Bar background
+--==================================================
+-- LOADING BAR
+--==================================================
 
 local LoadingBarBG = Instance.new("Frame")
 LoadingBarBG.Parent = LoadingFrame
-LoadingBarBG.Position = UDim2.new(0.10,0,0.79,0)
-LoadingBarBG.Size = UDim2.new(0.80,0,0,8)
-LoadingBarBG.BackgroundColor3 = Color3.fromRGB(4,12,24)
+LoadingBarBG.Position = UDim2.new(0.10, 0, 0.79, 0)
+LoadingBarBG.Size = UDim2.new(0.80, 0, 0, 8)
+LoadingBarBG.BackgroundColor3 = Color3.fromRGB(4, 12, 24)
 LoadingBarBG.BorderSizePixel = 0
 LoadingBarBG.ZIndex = 102
 
 local BarBGCorner = Instance.new("UICorner")
-BarBGCorner.CornerRadius = UDim.new(1,0)
+BarBGCorner.CornerRadius = UDim.new(1, 0)
 BarBGCorner.Parent = LoadingBarBG
 
 local LoadingBar = Instance.new("Frame")
 LoadingBar.Parent = LoadingBarBG
-LoadingBar.Size = UDim2.new(0,0,1,0)
-LoadingBar.BackgroundColor3 = Color3.fromRGB(0,165,255)
+LoadingBar.Size = UDim2.new(0, 0, 1, 0)
+LoadingBar.BackgroundColor3 = Color3.fromRGB(0, 165, 255)
 LoadingBar.BorderSizePixel = 0
 LoadingBar.ZIndex = 103
 
 local BarCorner = Instance.new("UICorner")
-BarCorner.CornerRadius = UDim.new(1,0)
+BarCorner.CornerRadius = UDim.new(1, 0)
 BarCorner.Parent = LoadingBar
 
--- Percent
+--==================================================
+-- LOADING PERCENT
+--==================================================
 
 local LoadingPercent = Instance.new("TextLabel")
 LoadingPercent.Parent = LoadingFrame
 LoadingPercent.BackgroundTransparency = 1
-LoadingPercent.Position = UDim2.new(0.05,0,0.86,0)
-LoadingPercent.Size = UDim2.new(0.9,0,0,18)
+LoadingPercent.Position = UDim2.new(0.05, 0, 0.86, 0)
+LoadingPercent.Size = UDim2.new(0.9, 0, 0, 18)
 LoadingPercent.Font = Enum.Font.GothamBold
 LoadingPercent.Text = "0%"
-LoadingPercent.TextColor3 = Color3.fromRGB(95,210,255)
+LoadingPercent.TextColor3 = Color3.fromRGB(95, 210, 255)
 LoadingPercent.TextSize = 11
 LoadingPercent.ZIndex = 102
 
@@ -248,21 +274,21 @@ LoadingPercent.ZIndex = 102
 local MainFrame = Instance.new("Frame")
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = ScreenGui
-MainFrame.AnchorPoint = Vector2.new(0.5,0.5)
-MainFrame.Position = UDim2.new(0.5,0,0.5,0)
-MainFrame.BackgroundColor3 = Color3.fromRGB(8,18,35)
-MainFrame.Size = UDim2.new(0,350,0,420)
+MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+MainFrame.BackgroundColor3 = Color3.fromRGB(8, 18, 35)
+MainFrame.Size = UDim2.new(0, 350, 0, 420)
 MainFrame.Active = true
 MainFrame.Draggable = true
 MainFrame.Visible = false
 
 local MainCorner = Instance.new("UICorner")
-MainCorner.CornerRadius = UDim.new(0,14)
+MainCorner.CornerRadius = UDim.new(0, 14)
 MainCorner.Parent = MainFrame
 
 local MainStroke = Instance.new("UIStroke")
 MainStroke.Parent = MainFrame
-MainStroke.Color = Color3.fromRGB(0,170,255)
+MainStroke.Color = Color3.fromRGB(0, 170, 255)
 MainStroke.Thickness = 1.5
 MainStroke.Transparency = 0.25
 
@@ -272,48 +298,48 @@ MainStroke.Transparency = 0.25
 
 local TopBar = Instance.new("Frame")
 TopBar.Parent = MainFrame
-TopBar.BackgroundColor3 = Color3.fromRGB(10,30,55)
-TopBar.Size = UDim2.new(1,0,0,65)
+TopBar.BackgroundColor3 = Color3.fromRGB(10, 30, 55)
+TopBar.Size = UDim2.new(1, 0, 0, 65)
 TopBar.BorderSizePixel = 0
 
 local TopCorner = Instance.new("UICorner")
-TopCorner.CornerRadius = UDim.new(0,14)
+TopCorner.CornerRadius = UDim.new(0, 14)
 TopCorner.Parent = TopBar
 
 local Title = Instance.new("TextLabel")
 Title.Parent = TopBar
 Title.BackgroundTransparency = 1
-Title.Position = UDim2.new(0.06,0,0.12,0)
-Title.Size = UDim2.new(0,250,0,28)
+Title.Position = UDim2.new(0.06, 0, 0.12, 0)
+Title.Size = UDim2.new(0, 250, 0, 28)
 Title.Font = Enum.Font.GothamBold
 Title.Text = "JOHN ON TOP 👑"
-Title.TextColor3 = Color3.fromRGB(70,200,255)
+Title.TextColor3 = Color3.fromRGB(70, 200, 255)
 Title.TextSize = 20
 Title.TextXAlignment = Enum.TextXAlignment.Left
 
 local Subtitle = Instance.new("TextLabel")
 Subtitle.Parent = TopBar
 Subtitle.BackgroundTransparency = 1
-Subtitle.Position = UDim2.new(0.06,0,0.55,0)
-Subtitle.Size = UDim2.new(0,230,0,18)
+Subtitle.Position = UDim2.new(0.06, 0, 0.55, 0)
+Subtitle.Size = UDim2.new(0, 230, 0, 18)
 Subtitle.Font = Enum.Font.Gotham
-Subtitle.Text = "1-PLAYER SERVER BROWSER"
-Subtitle.TextColor3 = Color3.fromRGB(130,170,200)
+Subtitle.Text = "LOW PLAYER FINDER"
+Subtitle.TextColor3 = Color3.fromRGB(130, 170, 200)
 Subtitle.TextSize = 10
 Subtitle.TextXAlignment = Enum.TextXAlignment.Left
 
 local CloseBtn = Instance.new("TextButton")
 CloseBtn.Parent = TopBar
-CloseBtn.BackgroundColor3 = Color3.fromRGB(20,70,110)
-CloseBtn.Position = UDim2.new(0.89,0,0.22,0)
-CloseBtn.Size = UDim2.new(0,32,0,32)
+CloseBtn.BackgroundColor3 = Color3.fromRGB(20, 70, 110)
+CloseBtn.Position = UDim2.new(0.89, 0, 0.22, 0)
+CloseBtn.Size = UDim2.new(0, 32, 0, 32)
 CloseBtn.Font = Enum.Font.GothamBold
 CloseBtn.Text = "×"
-CloseBtn.TextColor3 = Color3.fromRGB(220,245,255)
+CloseBtn.TextColor3 = Color3.fromRGB(220, 245, 255)
 CloseBtn.TextSize = 20
 
 local CloseCorner = Instance.new("UICorner")
-CloseCorner.CornerRadius = UDim.new(0,9)
+CloseCorner.CornerRadius = UDim.new(0, 9)
 CloseCorner.Parent = CloseBtn
 
 --==================================================
@@ -322,23 +348,23 @@ CloseCorner.Parent = CloseBtn
 
 local ScrollFrame = Instance.new("ScrollingFrame")
 ScrollFrame.Parent = MainFrame
-ScrollFrame.BackgroundColor3 = Color3.fromRGB(5,14,28)
-ScrollFrame.Position = UDim2.new(0.045,0,0.19,0)
-ScrollFrame.Size = UDim2.new(0,319,0,275)
-ScrollFrame.CanvasSize = UDim2.new(0,0,0,0)
+ScrollFrame.BackgroundColor3 = Color3.fromRGB(5, 14, 28)
+ScrollFrame.Position = UDim2.new(0.045, 0, 0.19, 0)
+ScrollFrame.Size = UDim2.new(0, 319, 0, 275)
+ScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
 ScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
 ScrollFrame.ScrollBarThickness = 4
-ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(0,160,255)
+ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(0, 160, 255)
 ScrollFrame.BorderSizePixel = 0
 
 local ScrollCorner = Instance.new("UICorner")
-ScrollCorner.CornerRadius = UDim.new(0,10)
+ScrollCorner.CornerRadius = UDim.new(0, 10)
 ScrollCorner.Parent = ScrollFrame
 
 local UIListLayout = Instance.new("UIListLayout")
 UIListLayout.Parent = ScrollFrame
 UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0,8)
+UIListLayout.Padding = UDim.new(0, 8)
 
 --==================================================
 -- REFRESH
@@ -347,16 +373,16 @@ UIListLayout.Padding = UDim.new(0,8)
 local RefreshBtn = Instance.new("TextButton")
 RefreshBtn.Name = "RefreshButton"
 RefreshBtn.Parent = MainFrame
-RefreshBtn.BackgroundColor3 = Color3.fromRGB(0,130,220)
-RefreshBtn.Position = UDim2.new(0.045,0,0.865,0)
-RefreshBtn.Size = UDim2.new(0,319,0,42)
+RefreshBtn.BackgroundColor3 = Color3.fromRGB(0, 130, 220)
+RefreshBtn.Position = UDim2.new(0.045, 0, 0.865, 0)
+RefreshBtn.Size = UDim2.new(0, 319, 0, 42)
 RefreshBtn.Font = Enum.Font.GothamBold
 RefreshBtn.Text = "⟳  REFRESH SERVERS"
-RefreshBtn.TextColor3 = Color3.fromRGB(255,255,255)
+RefreshBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
 RefreshBtn.TextSize = 13
 
 local RefreshCorner = Instance.new("UICorner")
-RefreshCorner.CornerRadius = UDim.new(0,9)
+RefreshCorner.CornerRadius = UDim.new(0, 9)
 RefreshCorner.Parent = RefreshBtn
 
 --==================================================
@@ -372,6 +398,7 @@ local function LoadServers()
     end
 
     local success, result = pcall(function()
+
         return HttpService:JSONDecode(
             game:HttpGet(
                 "https://games.roblox.com/v1/games/"
@@ -379,6 +406,7 @@ local function LoadServers()
                 .. "/servers/Public?sortOrder=Asc&limit=100"
             )
         )
+
     end)
 
     if not success or not result or not result.data then
@@ -386,10 +414,10 @@ local function LoadServers()
         local ErrorLabel = Instance.new("TextLabel")
         ErrorLabel.Parent = ScrollFrame
         ErrorLabel.BackgroundTransparency = 1
-        ErrorLabel.Size = UDim2.new(1,0,0,50)
+        ErrorLabel.Size = UDim2.new(1, 0, 0, 50)
         ErrorLabel.Font = Enum.Font.GothamBold
         ErrorLabel.Text = "Failed to fetch servers!"
-        ErrorLabel.TextColor3 = Color3.fromRGB(255,100,100)
+        ErrorLabel.TextColor3 = Color3.fromRGB(255, 100, 100)
         ErrorLabel.TextSize = 14
 
         return
@@ -409,38 +437,38 @@ local function LoadServers()
 
             local ServerFrame = Instance.new("Frame")
             ServerFrame.Parent = ScrollFrame
-            ServerFrame.BackgroundColor3 = Color3.fromRGB(12,32,55)
-            ServerFrame.Size = UDim2.new(0,300,0,48)
+            ServerFrame.BackgroundColor3 = Color3.fromRGB(12, 32, 55)
+            ServerFrame.Size = UDim2.new(0, 300, 0, 48)
             ServerFrame.BorderSizePixel = 0
             ServerFrame.LayoutOrder = count
 
             local ItemCorner = Instance.new("UICorner")
-            ItemCorner.CornerRadius = UDim.new(0,9)
+            ItemCorner.CornerRadius = UDim.new(0, 9)
             ItemCorner.Parent = ServerFrame
 
             local InfoLabel = Instance.new("TextLabel")
             InfoLabel.Parent = ServerFrame
             InfoLabel.BackgroundTransparency = 1
-            InfoLabel.Position = UDim2.new(0.045,0,0,0)
-            InfoLabel.Size = UDim2.new(0,175,1,0)
+            InfoLabel.Position = UDim2.new(0.045, 0, 0, 0)
+            InfoLabel.Size = UDim2.new(0, 175, 1, 0)
             InfoLabel.Font = Enum.Font.GothamMedium
             InfoLabel.Text = "Server " .. count .. "  •  1/" .. server.maxPlayers
-            InfoLabel.TextColor3 = Color3.fromRGB(180,225,255)
+            InfoLabel.TextColor3 = Color3.fromRGB(180, 225, 255)
             InfoLabel.TextSize = 13
             InfoLabel.TextXAlignment = Enum.TextXAlignment.Left
 
             local JoinBtn = Instance.new("TextButton")
             JoinBtn.Parent = ServerFrame
-            JoinBtn.BackgroundColor3 = Color3.fromRGB(0,130,220)
-            JoinBtn.Position = UDim2.new(0.70,0,0.18,0)
-            JoinBtn.Size = UDim2.new(0,78,0,30)
+            JoinBtn.BackgroundColor3 = Color3.fromRGB(0, 130, 220)
+            JoinBtn.Position = UDim2.new(0.70, 0, 0.18, 0)
+            JoinBtn.Size = UDim2.new(0, 78, 0, 30)
             JoinBtn.Font = Enum.Font.GothamBold
             JoinBtn.Text = "JOIN"
-            JoinBtn.TextColor3 = Color3.fromRGB(255,255,255)
+            JoinBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
             JoinBtn.TextSize = 12
 
             local JoinCorner = Instance.new("UICorner")
-            JoinCorner.CornerRadius = UDim.new(0,7)
+            JoinCorner.CornerRadius = UDim.new(0, 7)
             JoinCorner.Parent = JoinBtn
 
             JoinBtn.MouseButton1Click:Connect(function()
@@ -448,11 +476,13 @@ local function LoadServers()
                 JoinBtn.Text = "Joining..."
 
                 local ok = pcall(function()
+
                     TeleportService:TeleportToPlaceInstance(
                         PlaceId,
                         server.id,
                         Player
                     )
+
                 end)
 
                 if not ok then
@@ -468,10 +498,10 @@ local function LoadServers()
         local NoServerLabel = Instance.new("TextLabel")
         NoServerLabel.Parent = ScrollFrame
         NoServerLabel.BackgroundTransparency = 1
-        NoServerLabel.Size = UDim2.new(1,0,0,50)
+        NoServerLabel.Size = UDim2.new(1, 0, 0, 50)
         NoServerLabel.Font = Enum.Font.GothamBold
         NoServerLabel.Text = "No 1-player servers found!"
-        NoServerLabel.TextColor3 = Color3.fromRGB(100,190,255)
+        NoServerLabel.TextColor3 = Color3.fromRGB(100, 190, 255)
         NoServerLabel.TextSize = 14
 
     end
@@ -490,48 +520,74 @@ RefreshBtn.MouseButton1Click:Connect(function()
     task.wait(0.5)
 
     RefreshBtn.Text = "⟳  REFRESH SERVERS"
+
 end)
 
 --==================================================
 -- LOADING ANIMATION
 --==================================================
 
+local LoadingRunning = false
+
 local function StartLoading()
+
+    if LoadingRunning then
+        return
+    end
+
+    LoadingRunning = true
 
     KeyFrame.Visible = false
     MainFrame.Visible = false
     CircleBtn.Visible = false
     LoadingFrame.Visible = true
 
-    LoadingBar.Size = UDim2.new(0,0,1,0)
+    LoadingBar.Size = UDim2.new(0, 0, 1, 0)
     LoadingPercent.Text = "0%"
+    LoadingText.Text = "Loading..."
 
-    LoadingFrame.Size = UDim2.new(0,0,0,0)
+    LoadingFrame.Size = UDim2.new(0, 0, 0, 0)
 
     TweenService:Create(
         LoadingFrame,
-        TweenInfo.new(0.6,Enum.EasingStyle.Back,Enum.EasingDirection.Out),
+        TweenInfo.new(
+            0.6,
+            Enum.EasingStyle.Back,
+            Enum.EasingDirection.Out
+        ),
         {
-            Size = UDim2.new(0,285,0,285)
+            Size = UDim2.new(0, 285, 0, 285)
         }
     ):Play()
 
     task.wait(0.6)
 
     task.spawn(function()
-        while LoadingFrame.Visible do
-            TweenService:Create(
-                LoadingPicture,
-                TweenInfo.new(1.2,Enum.EasingStyle.Sine),
-                {Rotation = 360}
-            ):Play()
 
-            task.wait(1.2)
+        while LoadingFrame.Visible and LoadingRunning do
+
+            local rotateTween = TweenService:Create(
+                LoadingPicture,
+                TweenInfo.new(
+                    1.2,
+                    Enum.EasingStyle.Linear,
+                    Enum.EasingDirection.InOut
+                ),
+                {
+                    Rotation = 360
+                }
+            )
+
+            rotateTween:Play()
+            rotateTween.Completed:Wait()
+
             LoadingPicture.Rotation = 0
+
         end
+
     end)
 
-    for i = 0,100 do
+    for i = 0, 100 do
 
         LoadingPercent.Text = i .. "%"
 
@@ -551,124 +607,60 @@ local function StartLoading()
 
         TweenService:Create(
             LoadingBar,
-            TweenInfo.new(0.08,Enum.EasingStyle.Linear),
+            TweenInfo.new(
+                0.08,
+                Enum.EasingStyle.Linear,
+                Enum.EasingDirection.Out
+            ),
             {
-                Size = UDim2.new(i/100,0,1,0)
+                Size = UDim2.new(i / 100, 0, 1, 0)
             }
         ):Play()
 
         task.wait(0.035)
+
     end
 
     task.wait(0.6)
 
     TweenService:Create(
         LoadingFrame,
-        TweenInfo.new(0.45,Enum.EasingStyle.Back,Enum.EasingDirection.In),
+        TweenInfo.new(
+            0.45,
+            Enum.EasingStyle.Back,
+            Enum.EasingDirection.In
+        ),
         {
-            Size = UDim2.new(0,0,0,0)
+            Size = UDim2.new(0, 0, 0, 0)
         }
     ):Play()
 
     task.wait(0.45)
 
+    LoadingRunning = false
     LoadingFrame.Visible = false
+
     MainFrame.Visible = true
     CircleBtn.Visible = true
 
-    MainFrame.Size = UDim2.new(0,0,0,0)
+    MainFrame.Size = UDim2.new(0, 0, 0, 0)
 
     TweenService:Create(
         MainFrame,
-        TweenInfo.new(0.55,Enum.EasingStyle.Back,Enum.EasingDirection.Out),
+        TweenInfo.new(
+            0.55,
+            Enum.EasingStyle.Back,
+            Enum.EasingDirection.Out
+        ),
         {
-            Size = UDim2.new(0,350,0,420)
+            Size = UDim2.new(0, 350, 0, 420)
         }
     ):Play()
 
     LoadServers()
+
 end
 
 --==================================================
 -- KEY CHECK
---==================================================
-
-local function CheckKey()
-
-    local entered = KeyBox.Text
-
-    if entered == "" then
-        StatusLabel.Text = "Enter a key!"
-        return
-    end
-
-    for _, validKey in ipairs(VALID_KEYS) do
-
-        if entered == validKey then
-
-            StatusLabel.Text = "Key accepted!"
-            StatusLabel.TextColor3 = Color3.fromRGB(80,255,150)
-
-            task.wait(0.3)
-
-            StartLoading()
-            return
-        end
-    end
-
-    StatusLabel.Text = "Invalid key!"
-    StatusLabel.TextColor3 = Color3.fromRGB(255,90,90)
-    KeyBox.Text = ""
-end
-
-SubmitBtn.MouseButton1Click:Connect(CheckKey)
-
-KeyBox.FocusLost:Connect(function(enterPressed)
-
-    if enterPressed then
-        CheckKey()
-    end
-
-end)
-
---==================================================
--- CIRCLE TOGGLE
---==================================================
-
-CircleBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = not MainFrame.Visible
-end)
-
---==================================================
--- CLOSE
---==================================================
-
-CloseBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = false
-end)
-
---==================================================
--- KEYS
--- PUT YOUR KEYS HERE
---==================================================
-
-local VALID_KEYS = {
-
-    "JOHNONTOP",
-
-    -- Add more keys below:
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    ""
-
-}
-
---==================================================
--- END
---==================================================
+--==========
