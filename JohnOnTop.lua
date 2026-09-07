@@ -1,592 +1,518 @@
-local Players = game:GetService("Players")
-local HttpService = game:GetService("HttpService")
-local TeleportService = game:GetService("TeleportService")
-local TweenService = game:GetService("TweenService")
+local _0x01=game:GetService("Players")
+local _0x02=game:GetService("HttpService")
+local _0x03=game:GetService("TeleportService")
+local _0x04=game:GetService("TweenService")
 
-local Player = Players.LocalPlayer
-local PlaceId = game.PlaceId
+local _0x05=_0x01.LocalPlayer
+local _0x06=game.PlaceId
 
-local ScreenGui = Instance.new("ScreenGui")
-ScreenGui.Name = "JohnOnTopGUI"
-ScreenGui.ResetOnSpawn = false
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+local _0x07=Instance.new("ScreenGui")
+_0x07.Name="JOT_"..tostring(math.random(1000,9999))
+_0x07.ResetOnSpawn=false
+_0x07.ZIndexBehavior=Enum.ZIndexBehavior.Sibling
 
-if gethui then
-    ScreenGui.Parent = gethui()
-elseif syn and syn.protect_gui then
-    syn.protect_gui(ScreenGui)
-    ScreenGui.Parent = game:GetService("CoreGui")
-else
-    ScreenGui.Parent = game:GetService("CoreGui")
+pcall(function()
+    if gethui then
+        _0x07.Parent=gethui()
+    elseif syn and syn.protect_gui then
+        syn.protect_gui(_0x07)
+        _0x07.Parent=game:GetService("CoreGui")
+    else
+        _0x07.Parent=game:GetService("CoreGui")
+    end
+end)
+
+local function _0x08(_p,_n,_s)
+    local _o=Instance.new(_n)
+    _o.Parent=_p
+    if _s then
+        for _k,_v in pairs(_s) do
+            pcall(function() _o[_k]=_v end)
+        end
+    end
+    return _o
 end
 
---==================================================
--- CIRCLE BUTTON
---==================================================
+local _0x09=_0x08(_0x07,"ImageButton",{
+    Name="T_"..tostring(math.random(100,999)),
+    Position=UDim2.new(.05,0,.45,0),
+    Size=UDim2.new(0,55,0,55),
+    BackgroundTransparency=1,
+    BorderSizePixel=0,
+    Image="rbxassetid://134112829099529",
+    ScaleType=Enum.ScaleType.Crop,
+    Visible=false,
+    Active=true,
+    Draggable=true,
+    AutoButtonColor=false,
+    ZIndex=50
+})
 
-local CircleBtn = Instance.new("ImageButton")
-CircleBtn.Name = "CircleToggle"
-CircleBtn.Parent = ScreenGui
-CircleBtn.Position = UDim2.new(0.05,0,0.45,0)
-CircleBtn.Size = UDim2.new(0,55,0,55)
-CircleBtn.BackgroundTransparency = 1
-CircleBtn.BorderSizePixel = 0
-CircleBtn.Image = "rbxassetid://134112829099529"
-CircleBtn.ScaleType = Enum.ScaleType.Crop
-CircleBtn.Visible = false
-CircleBtn.Active = true
-CircleBtn.Draggable = true
-CircleBtn.AutoButtonColor = false
-CircleBtn.ZIndex = 50
+_0x08(_0x09,"UICorner",{
+    CornerRadius=UDim.new(1,0)
+})
 
-local CircleCorner = Instance.new("UICorner")
-CircleCorner.CornerRadius = UDim.new(1,0)
-CircleCorner.Parent = CircleBtn
+local _0x0A=_0x08(_0x07,"Frame",{
+    BackgroundColor3=Color3.fromRGB(8,18,35),
+    Position=UDim2.new(.5,-175,.5,-105),
+    Size=UDim2.new(0,350,0,210),
+    Visible=true,
+    BorderSizePixel=0
+})
 
---==================================================
--- LOADING
---==================================================
+_0x08(_0x0A,"UICorner",{
+    CornerRadius=UDim.new(0,14)
+})
 
-local LoadingFrame = Instance.new("Frame")
-LoadingFrame.Parent = ScreenGui
-LoadingFrame.BackgroundColor3 = Color3.fromRGB(8,18,35)
-LoadingFrame.Position = UDim2.new(0.5,-175,0.5,-105)
-LoadingFrame.Size = UDim2.new(0,350,0,210)
-LoadingFrame.Visible = true
-LoadingFrame.BorderSizePixel = 0
+local _0x0B=_0x08(_0x0A,"UIStroke",{
+    Color=Color3.fromRGB(0,170,255),
+    Thickness=1.5
+})
 
-local LoadingCorner = Instance.new("UICorner")
-LoadingCorner.CornerRadius = UDim.new(0,14)
-LoadingCorner.Parent = LoadingFrame
+local _0x0C=_0x08(_0x0A,"TextLabel",{
+    BackgroundTransparency=1,
+    Position=UDim2.new(.05,0,.12,0),
+    Size=UDim2.new(.9,0,0,35),
+    Font=Enum.Font.GothamBold,
+    Text="JOHN ON TOP 👑",
+    TextColor3=Color3.fromRGB(70,200,255),
+    TextSize=21
+})
 
-local LoadingStroke = Instance.new("UIStroke")
-LoadingStroke.Parent = LoadingFrame
-LoadingStroke.Color = Color3.fromRGB(0,170,255)
-LoadingStroke.Thickness = 1.5
+local _0x0D=_0x08(_0x0A,"TextLabel",{
+    BackgroundTransparency=1,
+    Position=UDim2.new(.05,0,.36,0),
+    Size=UDim2.new(.9,0,0,25),
+    Font=Enum.Font.Gotham,
+    Text="Starting...",
+    TextColor3=Color3.fromRGB(160,200,225),
+    TextSize=13
+})
 
-local LoadingTitle = Instance.new("TextLabel")
-LoadingTitle.Parent = LoadingFrame
-LoadingTitle.BackgroundTransparency = 1
-LoadingTitle.Position = UDim2.new(0.05,0,0.12,0)
-LoadingTitle.Size = UDim2.new(0.9,0,0,35)
-LoadingTitle.Font = Enum.Font.GothamBold
-LoadingTitle.Text = "JOHN ON TOP 👑"
-LoadingTitle.TextColor3 = Color3.fromRGB(70,200,255)
-LoadingTitle.TextSize = 21
+local _0x0E=_0x08(_0x0A,"TextLabel",{
+    BackgroundTransparency=1,
+    Position=UDim2.new(.05,0,.52,0),
+    Size=UDim2.new(.9,0,0,25),
+    Font=Enum.Font.GothamBold,
+    Text="0%",
+    TextColor3=Color3.fromRGB(100,210,255),
+    TextSize=14
+})
 
-local LoadingText = Instance.new("TextLabel")
-LoadingText.Parent = LoadingFrame
-LoadingText.BackgroundTransparency = 1
-LoadingText.Position = UDim2.new(0.05,0,0.36,0)
-LoadingText.Size = UDim2.new(0.9,0,0,25)
-LoadingText.Font = Enum.Font.Gotham
-LoadingText.Text = "Starting..."
-LoadingText.TextColor3 = Color3.fromRGB(160,200,225)
-LoadingText.TextSize = 13
+local _0x0F=_0x08(_0x0A,"Frame",{
+    BackgroundColor3=Color3.fromRGB(5,14,28),
+    Position=UDim2.new(.08,0,.70,0),
+    Size=UDim2.new(.84,0,0,12),
+    BorderSizePixel=0
+})
 
-local LoadingPercent = Instance.new("TextLabel")
-LoadingPercent.Parent = LoadingFrame
-LoadingPercent.BackgroundTransparency = 1
-LoadingPercent.Position = UDim2.new(0.05,0,0.52,0)
-LoadingPercent.Size = UDim2.new(0.9,0,0,25)
-LoadingPercent.Font = Enum.Font.GothamBold
-LoadingPercent.Text = "0%"
-LoadingPercent.TextColor3 = Color3.fromRGB(100,210,255)
-LoadingPercent.TextSize = 14
+_0x08(_0x0F,"UICorner",{
+    CornerRadius=UDim.new(1,0)
+})
 
-local LoadingBarBG = Instance.new("Frame")
-LoadingBarBG.Parent = LoadingFrame
-LoadingBarBG.BackgroundColor3 = Color3.fromRGB(5,14,28)
-LoadingBarBG.Position = UDim2.new(0.08,0,0.70,0)
-LoadingBarBG.Size = UDim2.new(0.84,0,0,12)
-LoadingBarBG.BorderSizePixel = 0
+local _0x10=_0x08(_0x0F,"Frame",{
+    BackgroundColor3=Color3.fromRGB(0,150,255),
+    Size=UDim2.new(0,0,1,0),
+    BorderSizePixel=0
+})
 
-local BarBGCorner = Instance.new("UICorner")
-BarBGCorner.CornerRadius = UDim.new(1,0)
-BarBGCorner.Parent = LoadingBarBG
+_0x08(_0x10,"UICorner",{
+    CornerRadius=UDim.new(1,0)
+})
 
-local LoadingBar = Instance.new("Frame")
-LoadingBar.Parent = LoadingBarBG
-LoadingBar.BackgroundColor3 = Color3.fromRGB(0,150,255)
-LoadingBar.Size = UDim2.new(0,0,1,0)
-LoadingBar.BorderSizePixel = 0
+local _0x11=_0x08(_0x07,"Frame",{
+    Name="C_"..tostring(math.random(1000,9999)),
+    BackgroundColor3=Color3.fromRGB(8,18,35),
+    Position=UDim2.new(.5,-160,0,25),
+    Size=UDim2.new(0,320,0,60),
+    BorderSizePixel=0,
+    Visible=false,
+    ZIndex=100
+})
 
-local BarCorner = Instance.new("UICorner")
-BarCorner.CornerRadius = UDim.new(1,0)
-BarCorner.Parent = LoadingBar
+_0x08(_0x11,"UICorner",{
+    CornerRadius=UDim.new(0,12)
+})
 
---==================================================
--- CREDITS POPUP
---==================================================
+local _0x12=_0x08(_0x11,"UIStroke",{
+    Color=Color3.fromRGB(0,170,255),
+    Thickness=1.5,
+    Transparency=.15
+})
 
-local CreditsFrame = Instance.new("Frame")
-CreditsFrame.Name = "CreditsPopup"
-CreditsFrame.Parent = ScreenGui
-CreditsFrame.BackgroundColor3 = Color3.fromRGB(8,18,35)
-CreditsFrame.Position = UDim2.new(0.5,-160,0,25)
-CreditsFrame.Size = UDim2.new(0,320,0,60)
-CreditsFrame.BorderSizePixel = 0
-CreditsFrame.Visible = false
-CreditsFrame.ZIndex = 100
+local _0x13=_0x08(_0x11,"TextLabel",{
+    BackgroundTransparency=1,
+    Size=UDim2.new(1,-20,1,0),
+    Position=UDim2.new(0,10,0,0),
+    Font=Enum.Font.GothamBold,
+    Text="Credits to JohnOnTop 👑",
+    TextColor3=Color3.fromRGB(70,200,255),
+    TextSize=16,
+    ZIndex=101
+})
 
-local CreditsCorner = Instance.new("UICorner")
-CreditsCorner.CornerRadius = UDim.new(0,12)
-CreditsCorner.Parent = CreditsFrame
+local function _0x14()
+    _0x11.Visible=true
+    _0x11.BackgroundTransparency=1
+    _0x13.TextTransparency=1
+    _0x12.Transparency=1
+    _0x11.Position=UDim2.new(.5,-160,-.05,0)
 
-local CreditsStroke = Instance.new("UIStroke")
-CreditsStroke.Parent = CreditsFrame
-CreditsStroke.Color = Color3.fromRGB(0,170,255)
-CreditsStroke.Thickness = 1.5
-CreditsStroke.Transparency = 0.15
-
-local CreditsText = Instance.new("TextLabel")
-CreditsText.Parent = CreditsFrame
-CreditsText.BackgroundTransparency = 1
-CreditsText.Size = UDim2.new(1,-20,1,0)
-CreditsText.Position = UDim2.new(0,10,0,0)
-CreditsText.Font = Enum.Font.GothamBold
-CreditsText.Text = "Credits to JohnOnTop 👑"
-CreditsText.TextColor3 = Color3.fromRGB(70,200,255)
-CreditsText.TextSize = 16
-CreditsText.ZIndex = 101
-
-local function ShowCredits()
-
-    CreditsFrame.Visible = true
-    CreditsFrame.BackgroundTransparency = 1
-    CreditsText.TextTransparency = 1
-    CreditsStroke.Transparency = 1
-
-    CreditsFrame.Position = UDim2.new(0.5,-160,-0.05,0)
-
-    local SlideIn = TweenService:Create(
-        CreditsFrame,
-        TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.Out),
+    _0x04:Create(
+        _0x11,
+        TweenInfo.new(.5,Enum.EasingStyle.Quint,Enum.EasingDirection.Out),
         {
-            Position = UDim2.new(0.5,-160,0,25),
-            BackgroundTransparency = 0
+            Position=UDim2.new(.5,-160,0,25),
+            BackgroundTransparency=0
         }
-    )
+    ):Play()
 
-    local TextIn = TweenService:Create(
-        CreditsText,
-        TweenInfo.new(0.4),
-        {
-            TextTransparency = 0
-        }
-    )
+    _0x04:Create(
+        _0x13,
+        TweenInfo.new(.4),
+        {TextTransparency=0}
+    ):Play()
 
-    local StrokeIn = TweenService:Create(
-        CreditsStroke,
-        TweenInfo.new(0.4),
-        {
-            Transparency = 0.15
-        }
-    )
+    _0x04:Create(
+        _0x12,
+        TweenInfo.new(.4),
+        {Transparency=.15}
+    ):Play()
 
-    SlideIn:Play()
-    TextIn:Play()
-    StrokeIn:Play()
-
-    -- Stay visible for 5 seconds
     task.wait(5)
 
-    local SlideOut = TweenService:Create(
-        CreditsFrame,
-        TweenInfo.new(0.5, Enum.EasingStyle.Quint, Enum.EasingDirection.In),
+    _0x04:Create(
+        _0x11,
+        TweenInfo.new(.5,Enum.EasingStyle.Quint,Enum.EasingDirection.In),
         {
-            Position = UDim2.new(0.5,-160,-0.05,0),
-            BackgroundTransparency = 1
+            Position=UDim2.new(.5,-160,-.05,0),
+            BackgroundTransparency=1
         }
-    )
+    ):Play()
 
-    local TextOut = TweenService:Create(
-        CreditsText,
-        TweenInfo.new(0.4),
-        {
-            TextTransparency = 1
-        }
-    )
+    _0x04:Create(
+        _0x13,
+        TweenInfo.new(.4),
+        {TextTransparency=1}
+    ):Play()
 
-    local StrokeOut = TweenService:Create(
-        CreditsStroke,
-        TweenInfo.new(0.4),
-        {
-            Transparency = 1
-        }
-    )
+    _0x04:Create(
+        _0x12,
+        TweenInfo.new(.4),
+        {Transparency=1}
+    ):Play()
 
-    SlideOut:Play()
-    TextOut:Play()
-    StrokeOut:Play()
-
-    task.wait(0.5)
-
-    CreditsFrame.Visible = false
+    task.wait(.5)
+    _0x11.Visible=false
 end
 
---==================================================
--- MAIN GUI
---==================================================
+local _0x15=_0x08(_0x07,"Frame",{
+    Name="M_"..tostring(math.random(1000,9999)),
+    BackgroundColor3=Color3.fromRGB(8,18,35),
+    Position=UDim2.new(.5,-175,.22,0),
+    Size=UDim2.new(0,350,0,420),
+    Active=true,
+    Draggable=true,
+    Visible=false,
+    BorderSizePixel=0
+})
 
-local MainFrame = Instance.new("Frame")
-MainFrame.Name = "MainFrame"
-MainFrame.Parent = ScreenGui
-MainFrame.BackgroundColor3 = Color3.fromRGB(8,18,35)
-MainFrame.Position = UDim2.new(0.5,-175,0.22,0)
-MainFrame.Size = UDim2.new(0,350,0,420)
-MainFrame.Active = true
-MainFrame.Draggable = true
-MainFrame.Visible = false
-MainFrame.BorderSizePixel = 0
+_0x08(_0x15,"UICorner",{
+    CornerRadius=UDim.new(0,14)
+})
 
-local MainCorner = Instance.new("UICorner")
-MainCorner.CornerRadius = UDim.new(0,14)
-MainCorner.Parent = MainFrame
+_0x08(_0x15,"UIStroke",{
+    Color=Color3.fromRGB(0,170,255),
+    Thickness=1.5,
+    Transparency=.25
+})
 
-local MainStroke = Instance.new("UIStroke")
-MainStroke.Parent = MainFrame
-MainStroke.Color = Color3.fromRGB(0,170,255)
-MainStroke.Thickness = 1.5
-MainStroke.Transparency = 0.25
+local _0x16=_0x08(_0x15,"Frame",{
+    BackgroundColor3=Color3.fromRGB(10,30,55),
+    Size=UDim2.new(1,0,0,65),
+    BorderSizePixel=0
+})
 
-local TopBar = Instance.new("Frame")
-TopBar.Parent = MainFrame
-TopBar.BackgroundColor3 = Color3.fromRGB(10,30,55)
-TopBar.Size = UDim2.new(1,0,0,65)
-TopBar.BorderSizePixel = 0
+_0x08(_0x16,"UICorner",{
+    CornerRadius=UDim.new(0,14)
+})
 
-local TopCorner = Instance.new("UICorner")
-TopCorner.CornerRadius = UDim.new(0,14)
-TopCorner.Parent = TopBar
+_0x08(_0x16,"TextLabel",{
+    BackgroundTransparency=1,
+    Position=UDim2.new(.06,0,.12,0),
+    Size=UDim2.new(0,250,0,28),
+    Font=Enum.Font.GothamBold,
+    Text="JOHN ON TOP 👑",
+    TextColor3=Color3.fromRGB(70,200,255),
+    TextSize=20,
+    TextXAlignment=Enum.TextXAlignment.Left
+})
 
-local Title = Instance.new("TextLabel")
-Title.Parent = TopBar
-Title.BackgroundTransparency = 1
-Title.Position = UDim2.new(0.06,0,0.12,0)
-Title.Size = UDim2.new(0,250,0,28)
-Title.Font = Enum.Font.GothamBold
-Title.Text = "JOHN ON TOP 👑"
-Title.TextColor3 = Color3.fromRGB(70,200,255)
-Title.TextSize = 20
-Title.TextXAlignment = Enum.TextXAlignment.Left
+_0x08(_0x16,"TextLabel",{
+    BackgroundTransparency=1,
+    Position=UDim2.new(.06,0,.55,0),
+    Size=UDim2.new(0,230,0,18),
+    Font=Enum.Font.Gotham,
+    Text="1-PLAYER SERVER BROWSER",
+    TextColor3=Color3.fromRGB(130,170,200),
+    TextSize=10,
+    TextXAlignment=Enum.TextXAlignment.Left
+})
 
-local Subtitle = Instance.new("TextLabel")
-Subtitle.Parent = TopBar
-Subtitle.BackgroundTransparency = 1
-Subtitle.Position = UDim2.new(0.06,0,0.55,0)
-Subtitle.Size = UDim2.new(0,230,0,18)
-Subtitle.Font = Enum.Font.Gotham
-Subtitle.Text = "LOW SERVER FINDER"
-Subtitle.TextColor3 = Color3.fromRGB(130,170,200)
-Subtitle.TextSize = 10
-Subtitle.TextXAlignment = Enum.TextXAlignment.Left
+local _0x17=_0x08(_0x16,"TextButton",{
+    BackgroundColor3=Color3.fromRGB(20,70,110),
+    Position=UDim2.new(.89,0,.22,0),
+    Size=UDim2.new(0,32,0,32),
+    Font=Enum.Font.GothamBold,
+    Text="×",
+    TextColor3=Color3.fromRGB(220,245,255),
+    TextSize=20
+})
 
-local CloseBtn = Instance.new("TextButton")
-CloseBtn.Parent = TopBar
-CloseBtn.BackgroundColor3 = Color3.fromRGB(20,70,110)
-CloseBtn.Position = UDim2.new(0.89,0,0.22,0)
-CloseBtn.Size = UDim2.new(0,32,0,32)
-CloseBtn.Font = Enum.Font.GothamBold
-CloseBtn.Text = "×"
-CloseBtn.TextColor3 = Color3.fromRGB(220,245,255)
-CloseBtn.TextSize = 20
+_0x08(_0x17,"UICorner",{
+    CornerRadius=UDim.new(0,9)
+})
 
-local CloseCorner = Instance.new("UICorner")
-CloseCorner.CornerRadius = UDim.new(0,9)
-CloseCorner.Parent = CloseBtn
+local _0x18=_0x08(_0x15,"ScrollingFrame",{
+    BackgroundColor3=Color3.fromRGB(5,14,28),
+    Position=UDim2.new(.045,0,.19,0),
+    Size=UDim2.new(0,319,0,275),
+    CanvasSize=UDim2.new(0,0,0,0),
+    AutomaticCanvasSize=Enum.AutomaticSize.Y,
+    ScrollBarThickness=4,
+    ScrollBarImageColor3=Color3.fromRGB(0,160,255),
+    BorderSizePixel=0
+})
 
-local ScrollFrame = Instance.new("ScrollingFrame")
-ScrollFrame.Parent = MainFrame
-ScrollFrame.BackgroundColor3 = Color3.fromRGB(5,14,28)
-ScrollFrame.Position = UDim2.new(0.045,0,0.19,0)
-ScrollFrame.Size = UDim2.new(0,319,0,275)
-ScrollFrame.CanvasSize = UDim2.new(0,0,0,0)
-ScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
-ScrollFrame.ScrollBarThickness = 4
-ScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(0,160,255)
-ScrollFrame.BorderSizePixel = 0
+_0x08(_0x18,"UICorner",{
+    CornerRadius=UDim.new(0,10)
+})
 
-local ScrollCorner = Instance.new("UICorner")
-ScrollCorner.CornerRadius = UDim.new(0,10)
-ScrollCorner.Parent = ScrollFrame
+local _0x19=_0x08(_0x18,"UIListLayout",{
+    SortOrder=Enum.SortOrder.LayoutOrder,
+    Padding=UDim.new(0,8)
+})
 
-local UIListLayout = Instance.new("UIListLayout")
-UIListLayout.Parent = ScrollFrame
-UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
-UIListLayout.Padding = UDim.new(0,8)
+local _0x1A=_0x08(_0x15,"TextButton",{
+    Name="RefreshButton",
+    BackgroundColor3=Color3.fromRGB(0,130,220),
+    Position=UDim2.new(.045,0,.865,0),
+    Size=UDim2.new(0,319,0,42),
+    Font=Enum.Font.GothamBold,
+    Text="⟳  REFRESH SERVERS",
+    TextColor3=Color3.fromRGB(255,255,255),
+    TextSize=13
+})
 
-local RefreshBtn = Instance.new("TextButton")
-RefreshBtn.Name = "RefreshButton"
-RefreshBtn.Parent = MainFrame
-RefreshBtn.BackgroundColor3 = Color3.fromRGB(0,130,220)
-RefreshBtn.Position = UDim2.new(0.045,0,0.865,0)
-RefreshBtn.Size = UDim2.new(0,319,0,42)
-RefreshBtn.Font = Enum.Font.GothamBold
-RefreshBtn.Text = "⟳  REFRESH SERVERS"
-RefreshBtn.TextColor3 = Color3.fromRGB(255,255,255)
-RefreshBtn.TextSize = 13
+_0x08(_0x1A,"UICorner",{
+    CornerRadius=UDim.new(0,9)
+})
 
-local RefreshCorner = Instance.new("UICorner")
-RefreshCorner.CornerRadius = UDim.new(0,9)
-RefreshCorner.Parent = RefreshBtn
+_0x08(_0x1A,"UIStroke",{
+    Color=Color3.fromRGB(70,200,255),
+    Thickness=1,
+    Transparency=.4
+})
 
-local RefreshStroke = Instance.new("UIStroke")
-RefreshStroke.Parent = RefreshBtn
-RefreshStroke.Color = Color3.fromRGB(70,200,255)
-RefreshStroke.Thickness = 1
-RefreshStroke.Transparency = 0.4
-
---==================================================
--- SERVER LOADER
---==================================================
-
-local function LoadServers()
-
-    for _,child in ipairs(ScrollFrame:GetChildren()) do
-        if child:IsA("Frame") or child:IsA("TextLabel") then
-            child:Destroy()
+local function _0x1B()
+    for _,_v in ipairs(_0x18:GetChildren()) do
+        if _v:IsA("Frame") or _v:IsA("TextLabel") then
+            _v:Destroy()
         end
     end
 
-    local success,result = pcall(function()
-        return HttpService:JSONDecode(
-            game:HttpGet(
-                "https://games.roblox.com/v1/games/"
-                .. PlaceId ..
-                "/servers/Public?sortOrder=Asc&limit=100"
-            )
-        )
+    local _ok,_data=pcall(function()
+        local _url="https://games.roblox.com/v1/games/"
+            ..tostring(_0x06)
+            .."/servers/Public?sortOrder=Asc&limit=100"
+
+        return _0x02:JSONDecode(game:HttpGet(_url))
     end)
 
-    if not success or not result or not result.data then
-
-        local ErrorLabel = Instance.new("TextLabel")
-        ErrorLabel.Parent = ScrollFrame
-        ErrorLabel.BackgroundTransparency = 1
-        ErrorLabel.Size = UDim2.new(1,0,0,50)
-        ErrorLabel.Font = Enum.Font.GothamBold
-        ErrorLabel.Text = "Failed to fetch servers!"
-        ErrorLabel.TextColor3 = Color3.fromRGB(255,100,100)
-        ErrorLabel.TextSize = 14
-
+    if not _ok or not _data or not _data.data then
+        local _e=_0x08(_0x18,"TextLabel",{
+            BackgroundTransparency=1,
+            Size=UDim2.new(1,0,0,50),
+            Font=Enum.Font.GothamBold,
+            Text="Failed to fetch servers!",
+            TextColor3=Color3.fromRGB(255,100,100),
+            TextSize=14
+        })
         return
     end
 
-    local count = 0
+    local _count=0
 
-    for _,server in ipairs(result.data) do
-
-        if count >= 25 then
+    for _,_srv in ipairs(_data.data) do
+        if _count>=25 then
             break
         end
 
-        if server.playing == 1 and server.id ~= game.JobId then
+        if _srv.playing==1 and _srv.id~=game.JobId then
+            _count+=1
 
-            count += 1
+            local _row=_0x08(_0x18,"Frame",{
+                BackgroundColor3=Color3.fromRGB(12,32,55),
+                Size=UDim2.new(0,300,0,48),
+                BorderSizePixel=0,
+                LayoutOrder=_count
+            })
 
-            local ServerFrame = Instance.new("Frame")
-            ServerFrame.Parent = ScrollFrame
-            ServerFrame.BackgroundColor3 = Color3.fromRGB(12,32,55)
-            ServerFrame.Size = UDim2.new(0,300,0,48)
-            ServerFrame.BorderSizePixel = 0
-            ServerFrame.LayoutOrder = count
+            _0x08(_row,"UICorner",{
+                CornerRadius=UDim.new(0,9)
+            })
 
-            local ItemCorner = Instance.new("UICorner")
-            ItemCorner.CornerRadius = UDim.new(0,9)
-            ItemCorner.Parent = ServerFrame
+            _0x08(_row,"UIStroke",{
+                Color=Color3.fromRGB(30,120,180),
+                Thickness=1,
+                Transparency=.55
+            })
 
-            local ItemStroke = Instance.new("UIStroke")
-            ItemStroke.Parent = ServerFrame
-            ItemStroke.Color = Color3.fromRGB(30,120,180)
-            ItemStroke.Thickness = 1
-            ItemStroke.Transparency = 0.55
+            _0x08(_row,"TextLabel",{
+                BackgroundTransparency=1,
+                Position=UDim2.new(.045,0,0,0),
+                Size=UDim2.new(0,175,1,0),
+                Font=Enum.Font.GothamMedium,
+                Text="Server ".._count.."  •  1/"..tostring(_srv.maxPlayers),
+                TextColor3=Color3.fromRGB(180,225,255),
+                TextSize=13,
+                TextXAlignment=Enum.TextXAlignment.Left
+            })
 
-            local InfoLabel = Instance.new("TextLabel")
-            InfoLabel.Parent = ServerFrame
-            InfoLabel.BackgroundTransparency = 1
-            InfoLabel.Position = UDim2.new(0.045,0,0,0)
-            InfoLabel.Size = UDim2.new(0,175,1,0)
-            InfoLabel.Font = Enum.Font.GothamMedium
-            InfoLabel.Text = "Server "..count.."  •  1/"..server.maxPlayers
-            InfoLabel.TextColor3 = Color3.fromRGB(180,225,255)
-            InfoLabel.TextSize = 13
-            InfoLabel.TextXAlignment = Enum.TextXAlignment.Left
+            local _join=_0x08(_row,"TextButton",{
+                BackgroundColor3=Color3.fromRGB(0,130,220),
+                Position=UDim2.new(.70,0,.18,0),
+                Size=UDim2.new(0,78,0,30),
+                Font=Enum.Font.GothamBold,
+                Text="JOIN",
+                TextColor3=Color3.fromRGB(255,255,255),
+                TextSize=12
+            })
 
-            local JoinBtn = Instance.new("TextButton")
-            JoinBtn.Parent = ServerFrame
-            JoinBtn.BackgroundColor3 = Color3.fromRGB(0,130,220)
-            JoinBtn.Position = UDim2.new(0.70,0,0.18,0)
-            JoinBtn.Size = UDim2.new(0,78,0,30)
-            JoinBtn.Font = Enum.Font.GothamBold
-            JoinBtn.Text = "JOIN"
-            JoinBtn.TextColor3 = Color3.fromRGB(255,255,255)
-            JoinBtn.TextSize = 12
+            _0x08(_join,"UICorner",{
+                CornerRadius=UDim.new(0,7)
+            })
 
-            local JoinCorner = Instance.new("UICorner")
-            JoinCorner.CornerRadius = UDim.new(0,7)
-            JoinCorner.Parent = JoinBtn
+            _join.MouseButton1Click:Connect(function()
+                _join.Text="Joining..."
 
-            JoinBtn.MouseButton1Click:Connect(function()
-
-                JoinBtn.Text = "Joining..."
-
-                local ok = pcall(function()
-                    TeleportService:TeleportToPlaceInstance(
-                        PlaceId,
-                        server.id,
-                        Player
+                local _success=pcall(function()
+                    _0x03:TeleportToPlaceInstance(
+                        _0x06,
+                        _srv.id,
+                        _0x05
                     )
                 end)
 
-                if not ok then
-                    JoinBtn.Text = "RETRY"
+                if not _success then
+                    _join.Text="RETRY"
                 end
-
             end)
         end
     end
 
-    if count == 0 then
-
-        local NoServerLabel = Instance.new("TextLabel")
-        NoServerLabel.Parent = ScrollFrame
-        NoServerLabel.BackgroundTransparency = 1
-        NoServerLabel.Size = UDim2.new(1,0,0,50)
-        NoServerLabel.Font = Enum.Font.GothamBold
-        NoServerLabel.Text = "No 1-player servers found!"
-        NoServerLabel.TextColor3 = Color3.fromRGB(100,190,255)
-        NoServerLabel.TextSize = 14
-
+    if _count==0 then
+        _0x08(_0x18,"TextLabel",{
+            BackgroundTransparency=1,
+            Size=UDim2.new(1,0,0,50),
+            Font=Enum.Font.GothamBold,
+            Text="No 1-player servers found!",
+            TextColor3=Color3.fromRGB(100,190,255),
+            TextSize=14
+        })
     end
 end
 
---==================================================
--- REFRESH
---==================================================
+_0x1A.MouseButton1Click:Connect(function()
+    _0x1A.Text="⟳  REFRESHING..."
+    _0x1A.Active=false
 
-RefreshBtn.MouseButton1Click:Connect(function()
+    _0x1B()
 
-    RefreshBtn.Text = "REFRESHING..."
-    RefreshBtn.Active = false
+    task.wait(.5)
 
-    LoadServers()
-
-    task.wait(0.5)
-
-    RefreshBtn.Text = "REFRESH SERVERS"
-    RefreshBtn.Active = true
-
+    _0x1A.Text="REFRESH SERVERS"
+    _0x1A.Active=true
 end)
 
---==================================================
--- LOADING ANIMATION
---==================================================
+local function _0x1C()
+    _0x0A.Visible=true
+    _0x15.Visible=false
+    _0x09.Visible=false
+    _0x11.Visible=false
 
-local function StartLoading()
+    for _i=0,100 do
+        _0x0E.Text=tostring(_i).."%"
+        _0x10.Size=UDim2.new(_i/100,0,1,0)
 
-    LoadingFrame.Visible = true
-    MainFrame.Visible = false
-    CircleBtn.Visible = false
-    CreditsFrame.Visible = false
-
-    for i = 0,100 do
-
-        LoadingPercent.Text = i.."%"
-        LoadingBar.Size = UDim2.new(i/100,0,1,0)
-
-        if i < 20 then
-            LoadingText.Text = "Initializing..."
-        elseif i < 40 then
-            LoadingText.Text = "Loading interface..."
-        elseif i < 60 then
-            LoadingText.Text = "Connecting to Roblox..."
-        elseif i < 80 then
-            LoadingText.Text = "Loading server finder..."
-        elseif i < 100 then
-            LoadingText.Text = "Preparing JOHN ON TOP..."
+        if _i<20 then
+            _0x0D.Text="Initializing..."
+        elseif _i<40 then
+            _0x0D.Text="Loading interface..."
+        elseif _i<60 then
+            _0x0D.Text="Connecting to Roblox..."
+        elseif _i<80 then
+            _0x0D.Text="Loading server finder..."
+        elseif _i<100 then
+            _0x0D.Text="Preparing JOHN ON TOP..."
         else
-            LoadingText.Text = "Ready!"
+            _0x0D.Text="Ready!"
         end
 
-        task.wait(0.025)
+        task.wait(.025)
     end
 
-    task.wait(0.4)
+    task.wait(.4)
 
-    local Fade = TweenService:Create(
-        LoadingFrame,
-        TweenInfo.new(0.35),
-        {
-            BackgroundTransparency = 1
-        }
-    )
+    _0x04:Create(
+        _0x0A,
+        TweenInfo.new(.35),
+        {BackgroundTransparency=1}
+    ):Play()
 
-    Fade:Play()
-
-    for _,object in ipairs(LoadingFrame:GetDescendants()) do
-
-        if object:IsA("TextLabel") then
-
-            TweenService:Create(
-                object,
-                TweenInfo.new(0.25),
-                {
-                    TextTransparency = 1
-                }
+    for _,_v in ipairs(_0x0A:GetDescendants()) do
+        if _v:IsA("TextLabel") then
+            _0x04:Create(
+                _v,
+                TweenInfo.new(.25),
+                {TextTransparency=1}
             ):Play()
-
-        elseif object:IsA("UIStroke") then
-
-            TweenService:Create(
-                object,
-                TweenInfo.new(0.25),
-                {
-                    Transparency = 1
-                }
+        elseif _v:IsA("UIStroke") then
+            _0x04:Create(
+                _v,
+                TweenInfo.new(.25),
+                {Transparency=1}
             ):Play()
-
         end
     end
 
-    task.wait(0.3)
+    task.wait(.3)
 
-    LoadingFrame.Visible = false
-    LoadingFrame.BackgroundTransparency = 0
+    _0x0A.Visible=false
+    _0x0A.BackgroundTransparency=0
 
-    for _,object in ipairs(LoadingFrame:GetDescendants()) do
-
-        if object:IsA("TextLabel") then
-            object.TextTransparency = 0
-        elseif object:IsA("UIStroke") then
-            object.Transparency = 0
+    for _,_v in ipairs(_0x0A:GetDescendants()) do
+        if _v:IsA("TextLabel") then
+            _v.TextTransparency=0
+        elseif _v:IsA("UIStroke") then
+            _v.Transparency=0
         end
-
     end
 
-    MainFrame.Visible = true
-    CircleBtn.Visible = true
+    _0x15.Visible=true
+    _0x09.Visible=true
 
-    LoadServers()
+    _0x1B()
 
-    -- Credits popup
-    task.spawn(ShowCredits)
+    task.spawn(_0x14)
 end
 
---==================================================
--- BUTTONS
---==================================================
-
-CircleBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = not MainFrame.Visible
+_0x09.MouseButton1Click:Connect(function()
+    _0x15.Visible=not _0x15.Visible
 end)
 
-CloseBtn.MouseButton1Click:Connect(function()
-    MainFrame.Visible = false
+_0x17.MouseButton1Click:Connect(function()
+    _0x15.Visible=false
 end)
 
---==================================================
--- START
---==================================================
-
-task.spawn(StartLoading)
+task.spawn(_0x1C)
