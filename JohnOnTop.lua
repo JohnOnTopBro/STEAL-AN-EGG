@@ -145,7 +145,7 @@ local _0x13=_0x08(_0x11,"TextLabel",{
     Size=UDim2.new(1,-20,1,0),
     Position=UDim2.new(0,10,0,0),
     Font=Enum.Font.GothamBold,
-    Text="Credits to JohnOnTop 👑",
+    Text="Made by JohnOnTop 👑",
     TextColor3=Color3.fromRGB(70,200,255),
     TextSize=16,
     ZIndex=101
@@ -253,7 +253,7 @@ _0x08(_0x16,"TextLabel",{
     Position=UDim2.new(.06,0,.55,0),
     Size=UDim2.new(0,230,0,18),
     Font=Enum.Font.Gotham,
-    Text="1-PLAYER SERVER BROWSER",
+    Text="LOW SERVER FINDER",
     TextColor3=Color3.fromRGB(130,170,200),
     TextSize=10,
     TextXAlignment=Enum.TextXAlignment.Left
@@ -424,7 +424,7 @@ local function _0x1B()
 end
 
 _0x1A.MouseButton1Click:Connect(function()
-    _0x1A.Text="⟳  REFRESHING..."
+    _0x1A.Text="REFRESHING..."
     _0x1A.Active=false
 
     _0x1B()
